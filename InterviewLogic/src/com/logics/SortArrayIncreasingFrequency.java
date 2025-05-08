@@ -1,5 +1,13 @@
 package com.logics;
 
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 public class SortArrayIncreasingFrequency {
 
 	public static void main(String[] args) {
@@ -25,5 +33,28 @@ public class SortArrayIncreasingFrequency {
 //
 //		Input: nums = [-1,1,-6,4,5,-6,1,4,1]
 //		Output: [5,-1,4,4,-6,-6,1,1,1]
+		
+		List<Integer> num = Arrays.asList(1,1,2,2,2,3);
+		
+		 Map<Integer, Long> dat = num.stream().collect(Collectors.groupingBy(m -> m, Collectors.counting()));
+		 
+		 Stream<Entry<Integer, Long>> revOrderData =  dat.entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()));
+		 
+		 revOrderData.forEach(m -> {
+			 for(int j=0;j<m.getValue();j++) {
+				 System.out.print(m.getKey());
+			 }
+			 
+		 });
+		 System.out.println();
+		
+           Stream<Entry<Integer, Long>> AssData =  dat.entrySet().stream().sorted(Map.Entry.comparingByValue());
+		 
+           AssData.forEach(m -> {
+    		 for(int j=0;j<m.getValue();j++) {
+			 System.out.print(m.getKey());
+		 }	 
+		 });
+		 
 	}
 }

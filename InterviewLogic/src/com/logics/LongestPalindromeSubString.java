@@ -17,6 +17,32 @@ public class LongestPalindromeSubString {
 
 		String in = "babad";
 		
+		System.out.println(pallString(in));
+		
 
 	}
+	
+	public static String pallString(String in) {
+		for(int i=0;i<in.length();i++) {
+			char fVal = in.charAt(i);
+			String stVal = ""+fVal;
+			
+			for(int j=i+1;j<in.length();j++) {
+				
+				stVal = stVal + in.charAt(j) ;
+				
+				//System.out.println(stVal);
+				
+				String revString = new StringBuilder().append(stVal).reverse().toString();
+				
+				if(revString.equalsIgnoreCase(stVal)) {
+					//System.out.println(stVal);
+					return stVal;
+				}
+				
+			}
+		}
+		return "";
+	}
+	
 }

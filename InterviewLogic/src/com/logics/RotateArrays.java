@@ -1,5 +1,11 @@
 package com.logics;
 
+import java.util.ArrayDeque;
+import java.util.Arrays;
+import java.util.Deque;
+import java.util.List;
+import java.util.Stack;
+
 public class RotateArrays {
 
 	public static void main(String[] args) {
@@ -23,6 +29,20 @@ public class RotateArrays {
 //		Explanation: 
 //		rotate 1 steps to the right: [99,-1,-100,3]
 //		rotate 2 steps to the right: [3,99,-1,-100]
+		
+		
+		List<Integer> num = Arrays.asList(-1,-100,3,99);
+		
+		
+		Deque<Integer> deque = new ArrayDeque<>();
+		deque.addAll(num);
 
+	
+		for(int i=0;i<2;i++) {
+			int val = deque.removeLast();
+			deque.addFirst(val);
+		}
+		
+		System.out.println(deque);
 	}
 }

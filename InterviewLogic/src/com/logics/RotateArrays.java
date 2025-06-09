@@ -34,6 +34,7 @@ public class RotateArrays {
 		List<Integer> num = Arrays.asList(-1,-100,3,99);
 		
 		
+		
 		Deque<Integer> deque = new ArrayDeque<>();
 		deque.addAll(num);
 

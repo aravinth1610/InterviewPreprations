@@ -29,6 +29,7 @@ public class MaxSubArray {
 			stVals = stVals + vals.get(i);
 			values.add(stVals);
 		}
+		System.out.println(values.toString());
 		
 		 System.out.println(values.stream().max(Comparator.comparing(Integer::intValue)).get());
 		

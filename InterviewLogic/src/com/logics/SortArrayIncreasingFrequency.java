@@ -48,7 +48,7 @@ public class SortArrayIncreasingFrequency {
 		 });
 		 System.out.println();
 		
-           Stream<Entry<Integer, Long>> AssData =  dat.entrySet().stream().sorted(Map.Entry.comparingByValue());
+           Stream<Entry<Integer, Long>> AssData =  dat.entrySet().stream().sorted(Entry.comparingByValue());
 		 
            AssData.forEach(m -> {
     		 for(int j=0;j<m.getValue();j++) {

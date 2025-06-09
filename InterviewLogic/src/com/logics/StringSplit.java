@@ -11,7 +11,7 @@ public class StringSplit {
 
 	public static void main(String[] args) {
 
-		String val = "a3b5";
+		String val = "a3b54252";
 
 		StringSpl(val);
 	}

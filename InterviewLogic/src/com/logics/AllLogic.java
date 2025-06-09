@@ -21,7 +21,7 @@ public class AllLogic {
 
 	public static void main(String[] args) {
 
-		stringWordCount();
+		evenAndOddOne();
 	}
 
 	public static void groupByLenght() {
@@ -79,7 +79,7 @@ public class AllLogic {
 			} else {
 				return Map.entry("Odd", n);
 			}
-		}).collect(Collectors.groupingBy(Map.Entry::getKey, Collectors.collectingAndThen(Collectors.toList(), l -> {
+		}).collect(Collectors.groupingBy(Entry::getKey, Collectors.collectingAndThen(Collectors.toList(), l -> {
 			return Map.of("Count", l.size(), "Number", l);
 		}
 		// Collectors.mapping(Map.Entry::getValue, Collectors.toList()
@@ -135,9 +135,14 @@ public class AllLogic {
 		List<String> palllndrom = Arrays.asList("mam", "red", "Madam", "blue", "black", "defied");
 
 		Map<?, ?> palVal = palllndrom.stream().distinct().map(pal -> {
-			boolean isPal = pal.equalsIgnoreCase(new StringBuilder().append(pal).reverse().toString());
-			return Map.entry(pal, isPal);
-		}).collect(Collectors.toMap(Entry::getKey, Entry::getValue));
+			Boolean isPal = pal.equalsIgnoreCase(new StringBuilder().append(pal).reverse().toString());
+			Map<String, Boolean> b = new HashMap<String, Boolean>();
+			b.put(pal, isPal);
+			return b;
+		//	return Map.entry(pal, isPal);
+		})
+				.flatMap(map -> map.entrySet().stream())  // If we use to return Map we need to use FlatMap
+				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 		System.out.println(palVal);
 	}
 

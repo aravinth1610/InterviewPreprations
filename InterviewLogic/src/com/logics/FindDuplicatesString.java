@@ -22,6 +22,8 @@ public class FindDuplicatesString {
 		Map<Object, Long> countVal =  datas.toLowerCase().trim().chars().mapToObj(m -> (char) m)
 				.collect(Collectors.groupingBy(v -> v, Collectors.counting()));
 		
+		System.out.println(countVal);
+		
 		Stream<Entry<Object, Long>> AssData =  countVal.entrySet().stream().sorted(Entry.comparingByValue());
 		
 		AssData.forEach(m -> {

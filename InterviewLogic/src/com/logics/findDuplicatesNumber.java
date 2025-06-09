@@ -13,7 +13,7 @@ public class findDuplicatesNumber {
 
 	public static void main(String[] args) {
 
-		List<Integer> num = Arrays.asList(7, 5, 3, 6, 4,1);
+		List<Integer> num = Arrays.asList(7, 5,5, 3, 6, 4,1);
 		System.out.println(hasDuplicates(num));
 	}
 
@@ -28,7 +28,7 @@ public class findDuplicatesNumber {
 
 		Set<Integer> unique = new HashSet<>();
 
-        return numbers.stream().anyMatch(n -> !unique.add(n));
+        return numbers.stream().anyMatch(n -> { boolean b = !unique.add(n); if(b) {System.out.println(n);};  return b; });
     }
 	
 

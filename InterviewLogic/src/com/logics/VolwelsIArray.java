@@ -9,16 +9,28 @@ import java.util.stream.Collectors;
 public class VolwelsIArray {
 
 	public static void main(String[] args) {
-		countVowelSubStringCount();
+		volwelsICountString();
 	}
 
 	public static void volwelsICountString() {
-		System.out.println("----f");
 		String name = "ramravigopal";
 		List<Character> volwels = Arrays.asList('a', 'e', 'i', 'o', 'u');
 
+
+		//Count
 		long count = name.chars().mapToObj(c -> (char) c).filter(volwels::contains).count();
-		System.out.println(count);
+
+		//Remove the volwels and print in List
+		List<Character> rmVolwels = name.chars().mapToObj(c -> (char) c).filter(c -> !volwels.contains(c)).collect(Collectors.toList());
+		
+		//Only Volwels and print in String
+		String onlyVolwels = name.chars().mapToObj(c -> (char) c).filter(c -> volwels.contains(c)).map(c -> String.valueOf(c)).collect(Collectors.joining());
+		
+		System.out.println("Count ::"+count);
+		
+		System.out.println("Remove the Volwels in List ::"+rmVolwels);
+		
+		System.out.println("Only Volwels in String ::"+onlyVolwels);
 	}
 
 	public static void CountNumberVowelIRange() {
@@ -50,7 +62,7 @@ public class VolwelsIArray {
 //		- "artro" is a vowel string because it starts with 'a' and ends with 'o'.
 //		The number of vowel strings in the mentioned range is 3.
 
-		List<String> words = Arrays.asList("are", "amy", "u");
+		List<String> words = Arrays.asList("hey","aeo","mu","ooo","artro");
 		List<Character> volwels = Arrays.asList('a', 'e', 'i', 'o', 'u');
 
 		Set<String> stValue = new HashSet<>();

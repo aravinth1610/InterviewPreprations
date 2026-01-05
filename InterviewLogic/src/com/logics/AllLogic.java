@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -21,7 +20,7 @@ public class AllLogic {
 
 	public static void main(String[] args) {
 
-		evenAndOddOne();
+		LongestCommonPrefix();
 	}
 
 	public static void groupByLenght() {
@@ -75,6 +74,7 @@ public class AllLogic {
 
 		Map<String, Map<String, Object>> result = num.stream().map(n -> {
 			if (n % 2 == 0) {
+
 				return Map.entry("even", n);
 			} else {
 				return Map.entry("Odd", n);
@@ -136,12 +136,13 @@ public class AllLogic {
 
 		Map<?, ?> palVal = palllndrom.stream().distinct().map(pal -> {
 			Boolean isPal = pal.equalsIgnoreCase(new StringBuilder().append(pal).reverse().toString());
-			Map<String, Boolean> b = new HashMap<String, Boolean>();
-			b.put(pal, isPal);
-			return b;
-		//	return Map.entry(pal, isPal);
+			// Map<String, Boolean> b = new HashMap<String, Boolean>();
+			// b.put(pal, isPal);
+			// return b;
+			return Map.entry(pal, isPal);
 		})
-				.flatMap(map -> map.entrySet().stream())  // If we use to return Map we need to use FlatMap
+				// .flatMap(map -> map.entrySet().stream()) // If we use to return Map we need
+				// to use FlatMap
 				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 		System.out.println(palVal);
 	}
@@ -170,9 +171,9 @@ public class AllLogic {
 	}
 
 	public static void groupByKeyAndValue() {
-//  O.P		3 :: 2
-//    		4 :: 1
-//	      	5 :: 1
+		// O.P 3 :: 2
+		// 4 :: 1
+		// 5 :: 1
 
 		List<String> value = List.of("one", "two", "three", "four");
 		System.out.println(value.stream().collect(Collectors.groupingBy(String::length, Collectors.counting())));
@@ -182,7 +183,7 @@ public class AllLogic {
 		String sent = "System.out.system.println(value.stream().collect(Collectors.groupingBy(String::length, Collectors.counting())))";
 
 		List<String> spSent = Arrays.asList(sent.split("[^a-zA-Z]+"));
-		
+
 		System.out.println("Count Each Values:: "
 				+ spSent.stream().map(m -> m + "=" + m.length()).collect(Collectors.toList()));
 
@@ -215,7 +216,7 @@ public class AllLogic {
 
 		AtomicBoolean isValid = new AtomicBoolean(true);
 
-		ex1.chars().mapToObj(m -> (char) m).forEach(c -> {
+		ex3.chars().mapToObj(m -> (char) m).forEach(c -> {
 			Map<Character, Character> bracketPairs = Map.of(')', '(', '}', '{', ']', '[');
 
 			if (bracketPairs.containsValue(c)) {
@@ -265,14 +266,26 @@ public class AllLogic {
 	public static void LongestCommonPrefix() {
 		List<String> val = Arrays.asList("flower", "flow", "flight");
 
-		val.stream().map(m -> m);
+		String result = val.stream().sorted().reduce((s1, s2) -> {
+
+			int i = 0;
+			int min = Math.min(s1.length(), s2.length());
+			while (i < min && s1.charAt(i) == s2.charAt(i)) {
+				i++;
+			}
+
+			return s1.substring(0, i);
+
+		}).orElse("");
+
+		System.out.println(result);
 	}
 
 	static class TreeNode {
 		int val;
 		TreeNode left, right;
 
-		TreeNode( int val ) {
+		TreeNode(int val) {
 			this.val = val;
 		}
 
@@ -345,24 +358,25 @@ public class AllLogic {
 		Map<Integer, Integer> map = Map.of(3, 6, 4, 2, 5, 1);
 
 		// Sort by values descending
-//		Stream<Map.Entry<Integer, Integer>> sorted = map.entrySet().stream().sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed());
-//	            .collect(
-//	                LinkedHashMap::new, // maintain insertion order
-//	                (m, e) -> m.put(e.getKey(), e.getValue()),
-//	                LinkedHashMap::putAll
-//	            )
-		//;
-//		Stream<Map.Entry<Integer, Integer>> sorted = 
-//				    map.entrySet().stream()
-//				        .sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed());
+		// Stream<Map.Entry<Integer, Integer>> sorted =
+		// map.entrySet().stream().sorted(Map.Entry.<Integer,
+		// Integer>comparingByValue().reversed());
+		// .collect(
+		// LinkedHashMap::new, // maintain insertion order
+		// (m, e) -> m.put(e.getKey(), e.getValue()),
+		// LinkedHashMap::putAll
+		// )
+		// ;
+		// Stream<Map.Entry<Integer, Integer>> sorted =
+		// map.entrySet().stream()
+		// .sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed());
 
-		Stream<Entry<Integer, Integer>> sorted = 
-				    map.entrySet().stream()
-				        .sorted(Entry.comparingByValue(Comparator.reverseOrder()));
+		Stream<Entry<Integer, Integer>> sorted = map.entrySet().stream()
+				.sorted(Entry.comparingByValue(Comparator.reverseOrder()));
 
 		sorted.forEach(data -> System.out.println(data));
 
 		System.out.println(sorted); // Output: {3=6, 4=2, 5=1}
 	}
-	
+
 }

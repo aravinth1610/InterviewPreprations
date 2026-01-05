@@ -1,5 +1,10 @@
 package com.logics;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 public class PalindromeString {
 
 	public static void main(String[] args) {
@@ -20,8 +25,23 @@ public class PalindromeString {
 				System.out.print(sp[i]+" ");
 			}
 		}
-		
-
-		
 	}
+	
+	public static void test1() {
+	    String in = "Malayalam is my mother tongue";
+
+	    String val = Arrays.stream(in.split(" "))
+	        .filter(word -> {
+	            Set<Character> seen = new HashSet<>();
+	            return word.toLowerCase()
+	                       .chars()
+	                       .allMatch(c -> seen.add((char) c));
+	        })
+	        .collect(Collectors.joining(" "));
+
+	    System.out.println(val);
+	}
+
 }
+
+

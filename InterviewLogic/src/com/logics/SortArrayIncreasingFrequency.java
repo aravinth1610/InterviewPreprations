@@ -34,21 +34,23 @@ public class SortArrayIncreasingFrequency {
 //		Input: nums = [-1,1,-6,4,5,-6,1,4,1]
 //		Output: [5,-1,4,4,-6,-6,1,1,1]
 		
+		approachSec();
+		
 		List<Integer> num = Arrays.asList(1,1,2,2,2,3);
 		
 		 Map<Integer, Long> dat = num.stream().collect(Collectors.groupingBy(m -> m, Collectors.counting()));
 		 
-		 Stream<Entry<Integer, Long>> revOrderData =  dat.entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()));
+//		 Stream<Entry<Integer, Long>> revOrderData =  dat.entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()));
 		 
-		 revOrderData.forEach(m -> {
-			 for(int j=0;j<m.getValue();j++) {
-				 System.out.print(m.getKey());
-			 }
-			 
-		 });
-		 System.out.println();
+//		 revOrderData.forEach(m -> {
+//			 for(int j=0;j<m.getValue();j++) {
+//				 System.out.print(m.getKey());
+//			 }
+//			 
+//		 });
+		 System.out.println(dat);
 		
-           Stream<Entry<Integer, Long>> AssData =  dat.entrySet().stream().sorted(Entry.comparingByValue());
+           Stream<Entry<Integer, Long>> AssData =  dat.entrySet().stream().sorted(Comparator.comparing(Entry::getValue)); // make Reverse order ,Comparator.reverseOrder()
 		 
            AssData.forEach(m -> {
     		 for(int j=0;j<m.getValue();j++) {
@@ -56,5 +58,21 @@ public class SortArrayIncreasingFrequency {
 		 }	 
 		 });
 		 
+	}
+	
+	
+	public static void approachSec() {
+	 List<Integer> num = Arrays.asList(1,1,2,2,2,3);
+	 String	in = num.stream().collect(Collectors.groupingBy(m -> m, Collectors.counting())).entrySet().stream().sorted(Comparator.comparing(Entry::getValue)).map(m -> {  // make Reverse order ,Comparator.reverseOrder();
+		 
+		 String st ="";
+		 
+		 for(int i=0;i<m.getValue();i++) {
+			 st = st + m.getKey();
+		 }
+		  
+		 return st;
+	 }).collect(Collectors.joining()); 
+  	System.out.println("sec :"+ in);
 	}
 }

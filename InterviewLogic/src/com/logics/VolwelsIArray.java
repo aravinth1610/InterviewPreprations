@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class VolwelsIArray {
 
 	public static void main(String[] args) {
-		volwelsICountString();
+		CountNumberVowelIRange();
 	}
 
 	public static void volwelsICountString() {
@@ -65,6 +65,20 @@ public class VolwelsIArray {
 		List<String> words = Arrays.asList("hey","aeo","mu","ooo","artro");
 		List<Character> volwels = Arrays.asList('a', 'e', 'i', 'o', 'u');
 
+		
+		words.stream().filter(m -> m.chars().mapToObj(c ->(char) c).noneMatch(volwels::contains)).toList();
+		
+		List<String> ds = words.stream()
+			    .filter(m ->
+			        !m.isEmpty() &&
+			        volwels.contains(m.charAt(0)) &&
+			        volwels.contains(m.charAt(m.length() - 1))
+			    )
+			    .toList();
+
+	System.out.println("ds: "+ds);
+		
+		
 		Set<String> stValue = new HashSet<>();
 
 		for (int i = 0; i < words.size(); i++) {

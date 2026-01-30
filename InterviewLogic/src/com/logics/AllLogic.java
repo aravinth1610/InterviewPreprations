@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.Stack;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -20,7 +22,7 @@ public class AllLogic {
 
 	public static void main(String[] args) {
 
-		LongestCommonPrefix();
+		sameWordCount();
 	}
 
 	public static void groupByLenght() {
@@ -379,4 +381,25 @@ public class AllLogic {
 		System.out.println(sorted); // Output: {3=6, 4=2, 5=1}
 	}
 
+	public static void sameWordCount() {
+		String[] ins = {"Apple", "Banana", "Coconut", "Mango", "Kiwi", "Melon", "Watermelon"};
+		
+		List<String> in = Arrays.asList(ins);
+		
+        Set<Character> seen = new HashSet<>();
+	    
+		List<String> result = in.stream()
+		        .filter(word -> {
+		            for (char c : word.toLowerCase().toCharArray()) {
+		                if (!seen.add(c)) {
+		                    return true; // duplicate found
+		                }
+		            }
+		            return false;
+		        })
+		        .toList();
+
+		System.out.println(result);
+	}
+	
 }
